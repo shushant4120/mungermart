@@ -1,0 +1,80 @@
+{
+  "info": {
+    "_postman_id": "f8f4d9b8-0000-4000-8000-000000000001",
+    "name": "Vegetable Loyalty SaaS - Dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Collection: Register tenant, Auth login, List products, Create product. Variables: baseUrl, apiKey, token."
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "apiKey", "value": "" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Register Tenant",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Acme Veggie Shop\",\n  \"ownerEmail\": \"owner@acme.example\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/api/v1/tenants/register", "host": ["{{baseUrl}}"], "path": ["api","v1","tenants","register"] }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth: Login (admin)",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"adminpass\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/api/v1/auth/login", "host": ["{{baseUrl}}"], "path": ["api","v1","auth","login"] }
+      },
+      "response": []
+    },
+    {
+      "name": "List Products (PLP)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-API-Key", "value": "{{apiKey}}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products/list-products?page=0&size=10",
+          "host": ["{{baseUrl}}"],
+          "path": ["api","v1","products","list-products"],
+          "query": [ { "key": "page", "value": "0" }, { "key": "size", "value": "10" } ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-API-Key", "value": "{{apiKey}}" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tenantId\": null,\n  \"name\": \"Green Cabbage\",\n  \"price\": 29.99,\n  \"stock\": 100\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/api/v1/products/create-product", "host": ["{{baseUrl}}"], "path": ["api","v1","products","create-product"] }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "info": {
+    "_postman_id": "b8c8f2e8-0000-4a2b-9f2b-000000000001",
+    "name": "Vegetable Loyalty SaaS - API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Tenant",
+      "item": [
+        {
+          "name": "Register Tenant",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shopName\": \"Veg Mart\",\n  \"ownerEmail\": \"owner@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/tenants/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tenants",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Product",
+      "item": [
+        {
+          "name": "PLP - List Products",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "X-API-Key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/products?page={{page}}&size={{size}}&q={{q}}&sortBy={{sortBy}}&direction={{direction}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","v1","products"],
+              "query": [
+                { "key": "page", "value": "{{page}}" },
+                { "key": "size", "value": "{{size}}" },
+                { "key": "q", "value": "{{q}}" },
+                { "key": "sortBy", "value": "{{sortBy}}" },
+                { "key": "direction", "value": "{{direction}}" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PDP - Get Product",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-API-Key", "value": "{{apiKey}}" } ],
+            "url": { "raw": "{{baseUrl}}/api/v1/products/{{productId}}", "host": ["{{baseUrl}}"], "path": ["api","v1","products","{{productId}}"] }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-API-Key", "value": "{{apiKey}}" },
+              { "key": "X-User-Role", "value": "{{role}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Tomato\",\n  \"price\": 25.5,\n  \"stock\": 100\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/products", "host": ["{{baseUrl}}"], "path": ["api","v1","products"] }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-API-Key", "value": "{{apiKey}}" },
+              { "key": "X-User-Role", "value": "{{role}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Tomato - Large\",\n  \"price\": 27.0,\n  \"stock\": 80\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/products/{{productId}}", "host": ["{{baseUrl}}"], "path": ["api","v1","products","{{productId}}"] }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [ { "key": "X-API-Key", "value": "{{apiKey}}" }, { "key": "X-User-Role", "value": "{{role}}" } ],
+            "url": { "raw": "{{baseUrl}}/api/v1/products/{{productId}}", "host": ["{{baseUrl}}"], "path": ["api","v1","products","{{productId}}"] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Customer",
+      "item": [
+        {
+          "name": "Create Customer",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "X-API-Key", "value": "{{apiKey}}" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Alice\",\n  \"phone\": \"9876543210\",\n  \"address\": \"123 Market St\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/customers", "host": ["{{baseUrl}}"], "path": ["api","v1","customers"] }
+          },
+          "response": []
+        },
+        {
+          "name": "List Customers",
+          "request": { "method": "GET", "header": [ { "key": "X-API-Key", "value": "{{apiKey}}" } ], "url": { "raw": "{{baseUrl}}/api/v1/customers", "host": ["{{baseUrl}}"], "path": ["api","v1","customers"] } },
+          "response": []
+        },
+        {
+          "name": "Get Customer by Card",
+          "request": { "method": "GET", "header": [ { "key": "X-API-Key", "value": "{{apiKey}}" } ], "url": { "raw": "{{baseUrl}}/api/v1/customers/card/{{cardId}}", "host": ["{{baseUrl}}"], "path": ["api","v1","customers","card","{{cardId}}"] } },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Purchase",
+      "item": [
+        {
+          "name": "Create Purchase",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "X-API-Key", "value": "{{apiKey}}" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cardId\": \"{{cardId}}\",\n  \"items\": [ { \"productId\": \"{{productId}}\", \"qty\": 2 } ],\n  \"redeemPoints\": 5\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/purchases", "host": ["{{baseUrl}}"], "path": ["api","v1","purchases"] }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "apiKey", "value": "" },
+    { "key": "role", "value": "MERCHANT" },
+    { "key": "page", "value": "0" },
+    { "key": "size", "value": "10" },
+    { "key": "q", "value": "" },
+    { "key": "sortBy", "value": "name" },
+    { "key": "direction", "value": "ASC" },
+    { "key": "productId", "value": "" },
+    { "key": "cardId", "value": "" }
+  ]
+}

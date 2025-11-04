@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Encoding",
+            "request": "launch",
+            "mainClass": "com.example.loyalty.tools.Encoding",
+            "projectName": "mission"
+        },
+        {
+            "type": "java",
+            "name": "VegetableLoyaltySaasApplication",
+            "request": "launch",
+            "mainClass": "com.example.loyalty.VegetableLoyaltySaasApplication",
+            "projectName": "mission"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MissionApplication<mission>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.munger.mission.MissionApplication",
+            "projectName": "mission",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

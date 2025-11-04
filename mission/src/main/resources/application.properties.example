@@ -1,0 +1,4 @@
+# Add your MongoDB connection here (replace with your URI)
+spring.data.mongodb.uri=mongodb://localhost:27017/vegetable_loyalty_saas
+
+server.port=8080
