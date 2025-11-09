@@ -1,7 +1,7 @@
 services:
   - type: web
     name: mungermart-api
-    env: java
+    runtime: java
     plan: free
     rootDir: mission
     buildCommand: "./mvnw clean package -DskipTests"
