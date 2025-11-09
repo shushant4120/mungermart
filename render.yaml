@@ -1,8 +1,7 @@
 services:
   - type: web
     name: mungermart-api
-    runtime: java
+    env: docker
     plan: free
     rootDir: mission
-    buildCommand: "./mvnw clean package -DskipTests"
-    startCommand: "java -jar target/*.jar"
+    dockerfilePath: ./mission/Dockerfile
